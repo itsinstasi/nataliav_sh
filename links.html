@@ -62,10 +62,13 @@
 				<div class="header__wrap">
 					<div class="header__left">
 						<a href="./" class="header__logo">
-							<div class="header__logo-pic"><img src="https://scontent-arn2-2.cdninstagram.com/v/t51.2885-19/s150x150/80887276_1254432568091181_3620717401156354048_n.jpg?_nc_ht=scontent-arn2-2.cdninstagram.com&_nc_ohc=ydIm2y1rxXwAX8lMLjX&oh=531273ae37d3f3b64aeacbde08dd1da1&oe=5EA4914D" alt="КОУЧ-ПРАКТИК👩‍🎓Наталья Шишина"></div>
+							<div class="header__logo-pic"><img src="https://scontent-arn2-2.cdninstagram.com/v/t51.2885-19/s150x150/80887276_1254432568091181_3620717401156354048_n.jpg?_nc_ht=scontent-arn2-2.cdninstagram.com&_nc_ohc=fDzW0BBCPRMAX-WqAHS&oh=3172ee9120482956add9d00109d9fe7c&oe=5EA4914D" alt="КОУЧ-ПРАКТИК👩‍🎓Наталья Шишина"></div>
 							<div class="header__logo-txt">nataliav_sh</div>
 						</a>
 						<div class="header__title">КОУЧ-ПРАКТИК👩‍🎓Наталья Шишина</div>
+					</div>
+					<div id="settingsContainer" class="header__right" style="display:none">
+						<button onclick="window.open('http://itsinsta.site/page.html?project=nataliav_sh');" class="btn stories-popup__buy">Настроить</button>
 					</div>
 				</div>
 			</div>
@@ -325,29 +328,29 @@
 								</div>
 							</div>
 							<div class="swiper-slide">
-								<div class="stories__slide" title="датасобытия">
-									<a href="./tags/./datasobytiya.html">
-										<div class="stories__slide-pic" style="background-image: url(./img/og/datasobytiya.png);"></div>
+								<div class="stories__slide" title="образы">
+									<a href="./tags/./obrazy.html">
+										<div class="stories__slide-pic" style="background-image: url(./img/og/obrazy.png);"></div>
 										<div class="stories__slide-txt" style="		color: #243154;
-">датасобытия</div>
+">образы</div>
 									</a>
 								</div>
 							</div>
 							<div class="swiper-slide">
-								<div class="stories__slide" title="каквыратьдату">
-									<a href="./tags/./kakvyrat-datu.html">
-										<div class="stories__slide-pic" style="background-image: url(./img/og/kakvyrat-datu.png);"></div>
+								<div class="stories__slide" title="медитация">
+									<a href="./tags/./meditatsiya.html">
+										<div class="stories__slide-pic" style="background-image: url(./img/og/meditatsiya.png);"></div>
 										<div class="stories__slide-txt" style="		color: #243154;
-">каквыратьдату</div>
+">медитация</div>
 									</a>
 								</div>
 							</div>
 							<div class="swiper-slide">
-								<div class="stories__slide" title="подходящаядата">
-									<a href="./tags/./podkhodyashchayadata.html">
-										<div class="stories__slide-pic" style="background-image: url(./img/og/podkhodyashchayadata.png);"></div>
+								<div class="stories__slide" title="работа с подсознанием">
+									<a href="./tags/./rabota-s-podsoznaniem.html">
+										<div class="stories__slide-pic" style="background-image: url(./img/og/rabota-s-podsoznaniem.png);"></div>
 										<div class="stories__slide-txt" style="		color: #243154;
-">подходящаядата</div>
+">работа с подсознанием</div>
 									</a>
 								</div>
 							</div>
@@ -544,7 +547,34 @@ function getFormData($form){
     return indexed_array;
 }
 
+var getUrlParameter = function getUrlParameter(sParam) {
+    var sPageURL = window.location.search.substring(1),
+        sURLVariables = sPageURL.split('&'),
+        sParameterName,
+        i;
+
+    for (i = 0; i < sURLVariables.length; i++) {
+        sParameterName = sURLVariables[i].split('=');
+
+        if (sParameterName[0] === sParam) {
+            return sParameterName[1] === undefined ? true : decodeURIComponent(sParameterName[1]);
+        }
+    }
+}
+
 $(document).ready(function(){
+	var lid = getUrlParameter("lid");
+	if (lid) {
+        localStorage.setItem("hasToken", true);
+
+		$("#settingsContainer").show();
+		$("#settingsContainer").children("btn").first().attr("onclick", 'window.open("http://itsinsta.site/invite.html?invitationId="' + lid + ')');
+	}
+	else if (localStorage.getItem("hasToken"))
+	{
+		$("#settingsContainer").show();
+	}
+
     $('form').submit(function(){
 	event.preventDefault(); //prevent default action 
 
